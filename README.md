@@ -72,6 +72,10 @@ SKN29 과정에서 진행한 팀 프로젝트 모음입니다.
 - VIF 분석으로 다중공선성 피처 12개 제거
 - 원본 61개 피처 → 파생 확장 79개 → 최종 38개 피처로 정리
 
+#### 모델 선정 근거
+
+본 프로젝트의 데이터는 항공사, 공항, 날씨, 스케줄 등 이질적인 출처의 피처가 혼재하는 정형(tabular) 데이터다. Grinsztajn et al. (2022, NeurIPS), *"Why do tree-based models still outperform deep learning on tabular data?"* ([참조](https://github.com/standing-o/Machine_Learning_Paper_Review/issues/19))에 따르면, 정형 데이터에서 트리 기반 모델이 딥러닝보다 우수한 이유로 무관한 피처에 대한 취약성, 과도한 평활화, 회전 불변성으로 인한 피처 축 방향 정보 손실 세 가지를 제시한다. 이를 근거로 XGBoost, LightGBM, RandomForest, Stacking을 주요 후보로 설정했다. 다만 해당 주장이 본 데이터셋에도 실제로 성립하는지 검증하기 위해 2단계 구조의 FCNN을 별도 설계하여 비교 실험을 진행했으며, 실험 결과 트리 기반 모델(XGBoost ROC-AUC 0.8437)이 FCNN(ROC-AUC 0.6844)을 유의미하게 앞서 논문의 주장이 본 데이터에도 부합함을 확인했다.
+
 #### 모델 성능 비교
 
 | 모델 | ROC-AUC | 지연 Recall | 특징 |
